@@ -6,7 +6,14 @@ build/
 # Local configuration file (sdk path, etc)
 local.properties
 
-# Log/OS Files
+# Node / JS
+node_modules/
+.env
+.env.*
+!/.env.example
+wa_auth/
+
+# Logs / OS
 *.log
 
 # Android Studio generated files and folders
