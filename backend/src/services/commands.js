@@ -1,0 +1,4 @@
+import {sendTelegram} from './telegram.js';
+import {sendWhatsApp} from './whatsapp.js';
+const names='!menu !help !ping !alive !owner !info !time !status !about !bible !verse !joke !meme !weather !news !translate !calc !remindme !privacy !terms'.split(' ');
+export async function handleCommand(text,sender,channel){const cmd=String(text||'').trim().split(/\s+/)[0].toLowerCase();let reply;if(cmd==='!ping')reply='Pong 🟢 FlexBot is online.';else if(cmd==='!alive'||cmd==='!status')reply='🟢 FlexBot is online.';else if(cmd==='!time')reply='Server time: '+new Date().toISOString();else if(cmd==='!menu'||cmd==='!help')reply='FlexBot commands: '+names.join(', ');else if(cmd==='!bible'||cmd==='!verse')reply='📖 Bible feature is registered. Configure your approved scripture source to enable full content.';else reply='🤖 FlexBot received your message. Type !menu for commands.';if(channel==='telegram')return sendTelegram(sender,reply);return sendWhatsApp(sender,reply)}

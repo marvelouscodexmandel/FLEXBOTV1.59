@@ -1,0 +1,48 @@
+services:
+  - type: web
+    name: flexbot-api
+    runtime: node
+    rootDir: backend
+    plan: free
+    region: frankfurt
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: flexbot-db
+          property: connectionString
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: WEBHOOK_VERIFY_TOKEN
+        generateValue: true
+      - key: TELEGRAM_WEBHOOK_SECRET
+        generateValue: true
+      - key: ADMIN_USERNAME
+        sync: false
+      - key: ADMIN_PASSWORD_HASH
+        sync: false
+      - key: WA_GRAPH_VERSION
+        value: v26.0
+      - key: WA_BUSINESS_ACCOUNT_ID
+        sync: false
+      - key: WA_PHONE_NUMBER_ID
+        sync: false
+      - key: WA_ACCESS_TOKEN
+        sync: false
+      - key: META_APP_SECRET
+        sync: false
+      - key: PUBLIC_BASE_URL
+        sync: false
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+
+databases:
+  - name: flexbot-db
+    plan: free
+    region: frankfurt
+    databaseName: flexbot
+    user: flexbot
