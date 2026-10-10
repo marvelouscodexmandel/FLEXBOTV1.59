@@ -16,16 +16,16 @@ const CORE_COMMANDS = [
 ];
 
 const GROUPS = {
-  study: ['plan','explain','quiz','flashcards','summary','notes','examples','revision','timetable','homework','maths','physics','chemistry','biology','english','economics','geography','history','civics','vocabulary','spelling','essay','debate','exam-tips','teach'],
-  writing: ['email','letter','apology','thankyou','invitation','announcement','caption','bio','story','poem','speech','essay','rewrite','proofread','headline','slogan','script','proposal','report','review','complaint','application','cover-letter','birthday','goodnight'],
-  productivity: ['todo','plan','goals','priorities','schedule','routine','focus','breakdown','checklist','decision','pros-cons','meeting','agenda','minutes','project','deadline','habit','tracker','weekly-review','daily-review','budget','saving','shopping-list','meal-plan','travel-plan'],
-  business: ['idea','business-plan','pitch','marketing','branding','customer-reply','product-description','pricing','sales-script','promotion','content-calendar','competitor-checklist','market-research','customer-survey','faq','invoice-note','follow-up','negotiation','launch-plan','risk-checklist','team-brief','job-post','interview','resume','presentation'],
-  social: ['greeting','reply','conversation','friendship','compliment','congratulations','condolence','encouragement','boundary','respectful-no','conflict','make-peace','group-rules','group-description','group-poll','event-invite','thank-admin','welcome-member','status-update','relationship-advice','icebreaker','fun-question','party-game','team-name','nickname'],
-  tech: ['debug-checklist','code-explain','javascript','html','css','nodejs','api-plan','database-plan','git-help','github-help','vscode-help','website-plan','app-plan','security-checklist','password-tips','backup-plan','troubleshoot','regex-explain','json-example','sql-example','command-line','project-readme','test-plan','deployment-checklist','learn-coding'],
-  wellbeing: ['mood-check','stress-reset','breathing','journal','confidence','self-care','sleep-routine','study-break','kind-self-talk','gratitude','calm-down','motivation','procrastination','healthy-boundaries','ask-for-help','positive-habit','screen-break','reflection','small-step','problem-solve','listen','encourage','reset-day','energy-check','support-message'],
-  creativity: ['brainstorm','song-idea','chorus','rap-idea','brand-name','logo-brief','video-idea','short-video','podcast-idea','character','worldbuild','plot','plot-twist','scene','dialogue','game-idea','game-quest','challenge','meme-caption','funny-line','tagline','visual-prompt','ad-script','story-prompt','creative-block'],
-  language: ['define','synonym','antonym','sentence','grammar','tense','punctuation','pronunciation-tips','vocabulary-list','word-of-day','paraphrase','simplify','formal-tone','casual-tone','pidgin-rephrase','translate-help','reading-practice','conversation-practice','comprehension','idiom','metaphor','simile','spelling-quiz','sentence-fix','learn-english'],
-  daily: ['check-in','quick-plan','decision-helper','reminder-text','thank-you-note','apology-text','birthday-wish','good-morning','good-night','affirmation','quote-of-day','random-choice','pros-and-cons','estimate','percentage','unit-conversion','time-management','packing-list','cleaning-plan','study-motivation','workout-plan','water-break','digital-detox','weekend-plan','goal-review']
+  study: ['plan','explain','quiz'],
+  writing: ['email','letter'],
+  productivity: ['todo','plan'],
+  business: ['idea','business-plan'],
+  social: ['greeting','reply'],
+  tech: ['debug-checklist','code-explain'],
+  wellbeing: ['mood-check','stress-reset'],
+  creativity: ['brainstorm','song-idea'],
+  language: ['define'],
+  daily: ['quick-plan']
 };
 
 const ACTIONS = Object.entries(GROUPS).flatMap(([group, actions]) =>
@@ -72,8 +72,8 @@ function makeMenu(page = '') {
   }
   return '🤖 FLEXBOT COMMAND MENU\n' +
     'Core: ' + CORE.map(c => '!' + c.name).join('  •  ') +
-    '\n\nCategories (25 commands each):\n' + Object.keys(GROUPS).map(g => '• !' + g + ' — ' + g + ' tools').join('\n') +
-    '\n\nTotal command triggers: ' + ALL.length + '.\nTry !study for study commands, !writing for writing commands, !productivity for planning, or !menu business.';
+    '\n\nCategory menus:\n' + Object.keys(GROUPS).map(g => '• !' + g + ' — ' + g + ' tools').join('\n') +
+    '\n\nTotal command triggers: ' + (ALL.length + Object.keys(GROUPS).length) + '.\nIncludes core commands, 10 category menus, and 19 focused helpers. Try !study, !writing, or !menu business.';
 }
 
 function groupReply(command, args) {
