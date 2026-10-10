@@ -44,5 +44,5 @@ databases:
   - name: flexbot-db
     plan: free
     region: frankfurt
-    databaseName: flexbot
-    user: flexbot
+    databaseName: flexbot_db
+    user: flexbot_db_user
