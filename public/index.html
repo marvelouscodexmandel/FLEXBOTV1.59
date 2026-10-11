@@ -88,7 +88,7 @@ footer { margin-top:25px; color:var(--muted); font-size:11px; display:flex; just
 <div id="app">
 <div class="layout">
 <aside>
-  <div class="brand"><div class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 10-13h-7z"/></svg></div><div>FLEXBOT<small>MESSAGING CONTROL</small></div></div>
+  <div class="brand"><div class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 10-13h-7z"/></svg></div><div>FLEXBOT<small>WHATSAPP CONTROL</small></div></div>
   <div class="nav-label">WORKSPACE</div>
   <nav id="nav">
     <button class="active" data-page="overview"><span class="nav-icon">▦</span> Overview</button>
@@ -151,7 +151,6 @@ footer { margin-top:25px; color:var(--muted); font-size:11px; display:flex; just
       <div class="card"><div class="card-head"><h3>Project links</h3><span>Open in a new tab</span></div><div class="steps">
         <div class="step"><div class="step-no">↗</div><div><strong>Render service</strong><p>Deployment, environment variables, and logs.</p><div class="btn-row"><button class="btn" id="renderLink">Open Render dashboard</button></div></div></div>
         <div class="step"><div class="step-no">↗</div><div><strong>GitHub repository</strong><p>Source code and change history.</p><div class="btn-row"><button class="btn" id="githubLink">Open repository</button></div></div></div>
-        <div class="step"><div class="step-no">↗</div><div><strong>Meta Developers</strong><p>WhatsApp product and webhook settings.</p><div class="btn-row"><button class="btn" id="metaLink">Open Meta Developers</button></div></div></div>
       </div><div class="notice">This preview does not read or change your account secrets. Use the official dashboards to manage real credentials.</div></div>
     </div>
   </section>
@@ -171,7 +170,7 @@ const chips=document.getElementById('chips');['All',...Object.keys(categories)].
 function renderCommands(){const q=document.getElementById('search').value.toLowerCase().trim();const out=document.getElementById('command-results');out.innerHTML='';let rows=[];Object.entries(categories).forEach(([cat,items])=>{if(activeCategory!=='All'&&cat!==activeCategory)return;items.forEach(cmd=>{if(!q||cmd.includes(q)||cat.toLowerCase().includes(q))rows.push({cat,cmd})})});rows.slice(0,100).forEach(({cat,cmd})=>{const el=document.createElement('div');el.className='command';const code=document.createElement('code');code.textContent=cmd;const small=document.createElement('small');small.textContent=cat;el.append(code,small);out.appendChild(el)});if(!rows.length){out.innerHTML='<div class="notice">No matching commands. Try a different search.</div>'}}
 document.getElementById('search').addEventListener('input',renderCommands);renderCommands();
 const webhook='https://flexbot-api-aynp.onrender.com/webhooks/whatsapp';function copyWebhook(){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(webhook).then(()=>toast('Webhook URL copied')).catch(()=>toast(webhook))}else toast(webhook)}['copyWebhook','copyWebhook2','copyWebhook3'].forEach(id=>document.getElementById(id).addEventListener('click',copyWebhook));
-const links={openMeta:'https://developers.facebook.com/',metaLink:'https://developers.facebook.com/',openRender:'https://dashboard.render.com/web/srv-db5400g473hc739pvml0',renderLink:'https://dashboard.render.com/web/srv-db5400g473hc739pvml0',githubLink:'https://github.com/marvelouscodexmandel/FLEXBOT'};Object.entries(links).forEach(([id,url])=>document.getElementById(id).addEventListener('click',()=>window.open(url,'_blank','noopener,noreferrer')));
+const links={openMeta:'https://developers.facebook.com/',openRender:'https://dashboard.render.com/web/srv-db5400g473hc739pvml0',renderLink:'https://dashboard.render.com/web/srv-db5400g473hc739pvml0',githubLink:'https://github.com/marvelouscodexmandel/FLEXBOT'};Object.entries(links).forEach(([id,url])=>document.getElementById(id).addEventListener('click',()=>window.open(url,'_blank','noopener,noreferrer')));
 </script>
 </body>
 </html>
