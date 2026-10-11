@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "FlexBot",
+    "slug": "flexbot-v159",
+    "version": "1.59.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "android": {
+      "package": "com.marvelouscodexmandel.flexbot",
+      "versionCode": 159,
+      "permissions": []
+    },
+    "splash": {
+      "backgroundColor": "#0b1020"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "REPLACE_WITH_EAS_PROJECT_ID"
+      }
+    }
+  }
+}
