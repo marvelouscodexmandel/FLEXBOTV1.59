@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "description": "FlexBot AI - WhatsApp Cloud API bot",
   "type": "module",
-  "main": "index.js",
+  "main": "backend/src/index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "npm --prefix backend start"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
-    "pino": "^9.0.0"
   }
 }
