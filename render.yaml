@@ -19,8 +19,6 @@ services:
         generateValue: true
       - key: WEBHOOK_VERIFY_TOKEN
         generateValue: true
-      - key: TELEGRAM_WEBHOOK_SECRET
-        generateValue: true
       - key: ADMIN_USERNAME
         sync: false
       - key: ADMIN_PASSWORD_HASH
@@ -36,8 +34,6 @@ services:
       - key: META_APP_SECRET
         sync: false
       - key: PUBLIC_BASE_URL
-        sync: false
-      - key: TELEGRAM_BOT_TOKEN
         sync: false
 
 databases:
