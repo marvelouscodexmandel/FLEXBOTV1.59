@@ -1,4 +1,3 @@
-import { sendTelegram } from './telegram.js';
 import { sendWhatsApp } from './whatsapp.js';
 
 const CORE_COMMANDS = [
@@ -260,7 +259,7 @@ function makeReply(text) {
   if (cmd === '!time') return '🕒 Server time (UTC): ' + new Date().toISOString();
   if (cmd === '!date') return '📅 Current date (UTC): ' + new Date().toISOString().slice(0, 10);
   if (cmd === '!owner') return '👑 FlexBot owner: ' + (process.env.BOT_OWNER_NAME || 'the bot administrator') + '.';
-  if (cmd === '!info' || cmd === '!about') return '🤖 FlexBot is a multi-platform productivity bot with study, writing, planning, business, social, tech and creative helpers.';
+  if (cmd === '!info' || cmd === '!about') return '🤖 FlexBot is a WhatsApp productivity bot with study, writing, planning, business, social, tech and creative helpers.';
   if (cmd === '!joke') return '😄 ' + jokes[Math.floor(Math.random() * jokes.length)];
   if (cmd === '!meme') return '😂 Meme idea: “Me: I will sleep early. Also me at 2 AM: one last scroll.”';
   if (cmd === '!quote' || cmd === '!motivate') return '✨ ' + quotes[Math.floor(Math.random() * quotes.length)];
@@ -293,6 +292,5 @@ function makeReply(text) {
 
 export async function handleCommand(text, sender, channel) {
   const reply = makeReply(text).slice(0, 3500);
-  if (channel === 'telegram') return sendTelegram(sender, reply);
   return sendWhatsApp(sender, reply);
 }
