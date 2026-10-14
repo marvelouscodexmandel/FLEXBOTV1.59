@@ -1,5 +1,6 @@
 import makeWASocket, { Browsers, BufferJSON, DisconnectReason, initAuthCreds } from '@whiskeysockets/baileys';
 import { pool } from '../db.js';
+import { makeReply } from './commands.js';
 
 let socket = null;
 let status = { state: 'disconnected', qr: null, lastConnectedAt: null, lastError: null };
@@ -86,9 +87,8 @@ async function handleIncoming(message) {
     'SELECT 1 FROM wa_allowed_users WHERE phone=$1 AND active=true LIMIT 1', [sender]
   );
   if (!allowed.rowCount) return;
-  if (text.toLowerCase() === '!ping' || text.toLowerCase() === 'ping') {
-    await socket?.sendMessage(jid, { text: 'Pong 🟢 FlexBot connection is responding.' });
-  }
+  const reply = makeReply(text);
+  if (reply) await socket?.sendMessage(jid, { text: reply.slice(0, 3500) });
 }
 
 export function getQrStatus() { return publicStatus(); }
