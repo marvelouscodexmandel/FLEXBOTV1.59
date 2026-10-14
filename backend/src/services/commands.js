@@ -243,12 +243,13 @@ function naturalReply(text) {
 
 function makeReply(text) {
   const input = clean(text);
-  if (!input) return 'Send a message or type !menu to see what I can do.';
+  if (!input) return null;
   const [rawCommand, ...args] = input.split(/\s+/);
-  const cmd = rawCommand.toLowerCase();
+  const prefix = rawCommand[0];
+  if (prefix !== '!' && prefix !== '.') return null;
+  const cmd = '!' + rawCommand.slice(1).toLowerCase();
   const argText = args.join(' ').trim();
-
-  if (!cmd.startsWith('!')) return naturalReply(input);
+  if (!cmd.slice(1)) return null;
   if (cmd === '!menu' || cmd === '!help') return makeMenu(argText);
   if (cmd === '!study' || cmd === '!writing' || cmd === '!productivity' || cmd === '!business' || cmd === '!social' || cmd === '!tech' || cmd === '!wellbeing' || cmd === '!creativity' || cmd === '!language' || cmd === '!daily') {
     const group = cmd.slice(1);
@@ -287,10 +288,11 @@ function makeReply(text) {
 
   const found = COMMANDS.get(cmd);
   if (found) return groupReply(found, argText);
-  return '❓ I don’t recognise "' + cmd + '". Type !menu to see commands, or send a normal message and I’ll try to respond.';
+  return null;
 }
 
 export async function handleCommand(text, sender, channel) {
-  const reply = makeReply(text).slice(0, 3500);
-  return sendWhatsApp(sender, reply);
+  const reply = makeReply(text);
+  if (!reply) return;
+  return sendWhatsApp(sender, reply.slice(0, 3500));
 }
