@@ -7,5 +7,7 @@ export async function initDb() {
  CREATE TABLE IF NOT EXISTS webhook_events(id bigserial PRIMARY KEY,event_key text UNIQUE NOT NULL,payload jsonb NOT NULL,created_at timestamptz NOT NULL DEFAULT now());
  CREATE TABLE IF NOT EXISTS audit_logs(id bigserial PRIMARY KEY,action text NOT NULL,metadata jsonb,created_at timestamptz NOT NULL DEFAULT now());
  CREATE TABLE IF NOT EXISTS wa_allowed_users(id bigserial PRIMARY KEY,phone text UNIQUE NOT NULL,label text,active boolean NOT NULL DEFAULT true,created_at timestamptz NOT NULL DEFAULT now(),updated_at timestamptz NOT NULL DEFAULT now());
- CREATE INDEX IF NOT EXISTS wa_allowed_users_active_idx ON wa_allowed_users(active,created_at DESC);`);
+ CREATE INDEX IF NOT EXISTS wa_allowed_users_active_idx ON wa_allowed_users(active,created_at DESC);
+ CREATE TABLE IF NOT EXISTS wa_auth_creds(id integer PRIMARY KEY CHECK(id=1),creds jsonb NOT NULL,updated_at timestamptz NOT NULL DEFAULT now());
+ CREATE TABLE IF NOT EXISTS wa_auth_keys(category text NOT NULL,key_id text NOT NULL,value jsonb NOT NULL,updated_at timestamptz NOT NULL DEFAULT now(),PRIMARY KEY(category,key_id));`);
 }
