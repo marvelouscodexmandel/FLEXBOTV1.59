@@ -5,6 +5,7 @@ import { getQrStatus, startQrSession, stopQrSession } from '../services/qr-sessi
 
 const r = Router();
 function ownerOnly(req, res, next) {
+  res.set('Cache-Control', 'no-store');
   try {
     const token = req.cookies?.flexbot_session;
     if (!token || !process.env.SESSION_SECRET) return res.status(401).json({ error: 'Owner sign-in required' });
@@ -18,7 +19,10 @@ r.use(ownerOnly);
 r.get('/status', (_req, res) => res.json({ ok: true, ...getQrStatus() }));
 r.post('/start', async (_req, res) => {
   try { res.json({ ok: true, ...await startQrSession() }); }
-  catch (err) { res.status(503).json({ ok: false, error: 'Could not start QR session', detail: err.message }); }
+  catch (err) {
+    console.error('FlexBot QR session start failed:', err?.message || 'unknown error');
+    res.status(503).json({ ok: false, error: 'Could not start QR session. Check server logs and database configuration.' });
+  }
 });
 r.post('/stop', async (_req, res) => res.json({ ok: true, ...await stopQrSession() }));
 r.get('/users', async (_req, res) => {

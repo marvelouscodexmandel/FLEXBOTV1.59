@@ -241,7 +241,7 @@ function naturalReply(text) {
   return '🤖 I got your message: “' + s.slice(0, 450) + '”\n\nI can help you work through it. What would you like me to do — explain it, suggest a reply, summarise it, or make a plan? Type !menu to explore my tools.';
 }
 
-function makeReply(text) {
+export function makeReply(text) {
   const input = clean(text);
   if (!input) return 'Send a message or type !menu to see what I can do.';
   const [rawCommand, ...args] = input.split(/\s+/);
